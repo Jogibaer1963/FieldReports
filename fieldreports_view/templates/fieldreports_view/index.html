@@ -1,0 +1,45 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width-device-width, initial-scale-1, shrink-to-fit=no">
+    <title>Load Excel</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %} "  type="text/css", media="screen, projection">
+    <link rel="stylesheet" href="{% static 'css/index.css' %} "  type="text/css",>
+</head>
+    <body>
+        <div class="container top-position ">
+              <h1 class="text-color">Field Reports</h1>
+        </div>
+        <div class="download-time">
+            <h3>Last Download : {{ last_download }}</h3>
+        </div>
+        <div class="upload-button">
+            <form action="" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+               {{ form.as_p }}
+                <button type="submit" class="btn-info button-position">Upload Excel File</button>
+            </form>
+        </div>
+        <div class="excel-tabel">
+                <h2>Data Table</h2>
+            <table>
+                <thead>
+                    <tr>
+                       <td>Machine</td>
+                        <td>Report</td>
+                    </tr>
+                </thead>
+                <tbody>
+                        <tr>
+                            {% for value in rtable_data.values %}
+                                <td>{{ value.machine }}</td>
+                                <td>{{ value.report }}</td>
+                            {% endfor %}
+                        </tr>
+                </tbody>
+            </table>
+        </div>
+    </body>
+</html>
